@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ニュース検索</title>
+    <title>mbtiニュース速報</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
-    <h1>ニュース検索</h1>
+    <h1>mbtiニュース速報</h1>
+    <h2>あなたのmbtiに合ったニュースをご提供します。以下の入力欄にあなたのmbtiを入れてください。</h2>
     <div class="container">
     <div class="research">
     <form action="/" method="GET">
         <!--検索バー-->
         <p>
-            検索<br>
-            <input type="text" name="keyword" placeholder="キーワード">
+            あなたのmbtiを入れてください<br>
+            <input type="text" name="mbti" placeholder="mbti">
         </p>
         <p>
             <input type="submit"  class="button" value="送信">
         </p>
     </form>
     </div>
+    {% if errors %}
+    {% for error in errors %}
+    <p style="color:red;">{{error}}</p>
+    {% endfor %}
+    {% endif %}
     
     <!--結果表示欄 (for文で列挙)-->
     結果<br> 
@@ -42,12 +48,12 @@
     {% endfor %}
     </div>
 
-    {% if keyword %}
+    {% if mbti %}
     <div class="trans">
         {% if page > 1 %}
-        <a href="/?keyword={{ keyword }}&page={{ page - 1 }}">前へ</a>
+        <a href="/?mbti={{ mbti }}&page={{ page - 1 }}">前へ</a>
         {% endif %}
-        <a href="/?keyword={{ keyword }}&page={{ page + 1 }}">次へ</a>
+        <a href="/?mbti={{ mbti }}&page={{ page + 1 }}">次へ</a>
     </div>
     {% endif %}
 
